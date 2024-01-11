@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+<!-- 
+
+数据范围：1 ≤ n ≤100，保证输入的字符串中仅包含小写字母
+输入描述：
+    先输入密匙key和要加密的字符串
+输出描述：
+    返回加密后的字符串
+
+示例：
+          key      要加密的字符串
+    输入: nihao         ni
+    输出：              le
+-->
+<script>
+    /*
+            arr = nihaobcd e fgjk l mpqrstuvwxyz
+        allChar = abcdefgh i jklm n opqrstuvwxyz
+    */ 
+    
+    var key = 'nihao';//密匙
+    //将密匙转为数组 并 去重
+    let arr = [...new Set([...key])];// ['n', 'i', 'h', 'a', 'o']
+    let allChar = [...'abcdefghijklmnopqrstuvwxyz'];//将所有小写字母转为数组
+    for (let i = 0; i < 26; i++) {
+        if(!arr.includes(allChar[i])){//如果arr中没有allChar数组中的哪一项
+            arr.push(allChar[i])////把key中没有的字符加入字母表，且让arr中已存在的当头，这样可以导致字母表错乱而实现加密效果
+        }
+    }
+    let word = 'ni';//需要加密的字符串
+    let miwenArr = [];//定义密文数组
+    for (let j = 0; j < word.length; j++) {
+        let index = allChar.indexOf(word[j]);//返回字母表中word每一项的下标
+        miwenArr.push(arr[index]);//因为补充完整的arr数组和字母表allChar都为26个字母，找到n和i下标在补充完整的arr数组中对应的字符
+    }
+    console.log(miwenArr.join(""));
+
+    
+</script>
+</body>
+
+</html>

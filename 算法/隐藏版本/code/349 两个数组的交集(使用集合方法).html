@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        给定两个数组 nums1 和 nums2 ，返回 它们的交集 。输出结果中的每个元素一定是 唯一 的。我们可以 不考虑输出结果的顺序 
+
+        输入：nums1 = [1,2,2,1], nums2 = [2,2]
+        输出：[2]
+
+        解题思路：
+            1.求交集且无序唯一
+            2.使用集合
+        
+        解题步骤：
+            1.用集合对nums1去重
+            2.遍历nums1，筛选出nums2也包含的值
+     -->
+     <script>
+        var intersection = function(nums1,nums2){
+            return [...new Set(nums1)].filter(n=>nums2.includes(n))
+        }
+
+        // 时间复杂度：Om*n,filter为On，includes也为On 
+        // 空间复杂度：On，n为去重后nums1的长度
+
+     </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+描述：
+    现有n种砝码，重量互不相等，分别为 m1,m2,m3…mn ；
+每种砝码对应的数量为 x1,x2,x3...xn 。现在要用这些砝码去称物体的重量(放在同一侧)，问能称出多少种不同的重量。
+注：
+    称重重量包括 0
+
+数据范围：每组输入数据满足1 ≤ n ≤100，1 ≤ Mi ≤ 2000，1 ≤ Xi ≤10
+输入描述：
+    对于每组测试数据：
+        第一行：n --- 砝码的种数(范围[1,10])
+        第二行：m1 m2 m3 ... mn --- 每种砝码的重量(范围[1,2000])
+        第三行：x1 x2 x3 .... xn --- 每种砝码对应的数量(范围[1,10])
+输出描述：
+    利用给定的砝码可以称出的不同的重量数
+
+示例：
+         
+    输入:  2      (砝码种数)                 提供了两种砝码
+           1  2   (每种砝码重量)             1kg    2kg
+           2  1   (每种砝码对应的数量)        2个    1个  => [1kg 1kg  2kg]
+    输出： 5                            可以称5种重量：0(不放)、1kg 2kg 3kg 4kg
+    说明：可以表示出0，1，2，3，4五种重量。   
+-->
+    <script>
+    /*
+        map(Number):map 方法用于对数组中的每个元素执行指定的操作，并返回一个新数组，原数组不受影响。
+        map 接受一个参数，这个参数是一个函数，这个函数会被依次作用于数组中的每一个元素。
+
+    */ 
+        // 不使用动态规划  思路类似动态规划
+        var type = '2';
+        var weight = '1 2';
+        var num = '2 1';
+        let n = Number(type);//砝码种数
+        // 先将字符串分割为数组，然后对数组中的每个元素使用 Number 函数转换为一个数字，并将结果存储在 weights 这个变量中。
+        let weights = weight.split(' ').map(Number);//砝码重量
+        let nums = num.split(' ').map(Number);//砝码个数
+        let map = [0];//map数组放着一个0代表着0kg不放砝码
+        for (let i = 0; i < n; i++) {
+            for (let j = 1; j <= nums[i]; j++) {//j=1，砝码个数最少为1，不放砝码的已经存放在map数组中了
+                let tmpArr = [...map];
+                let newArr = arrAddN(tmpArr, weights[i]);
+                map = [...new Set([...tmpArr, ...newArr])];
+            }
+        }
+        console.log(map.length);
+        function arrAddN(arr, n) {
+            return arr.map(item => item + n)
+        }
+
+
+    </script>
+</body>
+
+</html>

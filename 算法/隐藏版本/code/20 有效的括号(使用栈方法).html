@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        输入：{[]}   {[}]    ()   ()[]{}
+        输出：true   false  true   true
+
+        解题思路：
+            对于没有闭环的左括号而言，越靠后的左括号，对应的右括号越靠前
+            满足后进先出，考虑使用栈
+        解题步骤：
+            1.新建一个栈(js使用数组模拟)
+            2.扫描字符串，遇到左括号就入栈，遇到和栈顶（数组最后一位）括号类型匹配的右括号就出栈，类型不匹配直接判定为不合法
+            3.最后栈(数组)空了就合法，否则不合法
+
+     -->
+
+     <script>
+        var isValid = function(s) {
+            // 如果字符串长度为奇数则不需要进入循环了
+            if(s.length%2 === 1){return false;}
+            const stack = [];
+            for (let i = 0; i < s.length; i++) {
+                const c = s[i];
+                if (c === '(' || c === '[' || c === '{') {
+                    stack.push(c);
+                }else{
+                    const t = stack[stack.length-1];//获取栈里最后一位
+                    if((t === '(' && c === ')') ||(t === '[' && c === ']') ||(t === '{' && c === '}') ){
+                        stack.pop();//出栈，删除栈中最后一位
+                    }else{
+                        return false;
+                    }
+                }
+            }
+            // 如果for循环完了还是没return false则主动置0
+            return stack.length === 0;
+        }
+        // 时间复杂度：On, 只有一个for循环 n为s.length;
+        // 空间复杂度：On，我们新建了一个stack栈，极端情况就是将s中所有字符都push到stack中，stack可能会占用n个内存单元，n是s的长度
+     </script>
+</body>
+</html>

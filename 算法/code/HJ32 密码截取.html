@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+<!-- 
+数据范围：字符串长度满足  1≤n≤2500
+输入描述：
+    输入一个字符串（字符串的长度不超过2500）
+输出描述：
+    返回有效密码串的最大长度
+
+示例：
+    输入: ABBA  ABBBA   12HHHHA
+    输出： 4      5        4    
+找到给定字符串中的最长回文子串的长度。
+        
+-->
+<script>
+    /*
+        分两种情况
+        奇数(ABBBA)
+        偶数(ABBA)
+    */
+    let str = 'ABBA';
+    let arr = Array.from(str);
+    let res = [];
+    for (let i = 0; i < arr.length; i++) {
+        let a = d1(i, arr);
+        let b = d2(i, arr);
+        res[i] = Math.max(a, b)
+    }
+    console.log(Math.max(...res));
+    // 当传入的是奇数(ABA)
+    function d1(index, arr) {
+        let l = index - 1;
+        let r = index + 1;
+        let count = 1;
+        while (l >= 0 && r < arr.length) {
+            if (arr[l] == arr[r]) {
+                count += 2;
+                l--
+                r++
+            } else {
+                break
+            }
+        }
+        return count;
+    }
+    // 当传入的是偶数(ABBA)
+    function d2(index, arr) {
+        let l = index;
+        let r = index + 1
+        let count = 0;
+        while (l >= 0 && r < arr.length) {
+            if (arr[l] == arr[r]) {
+                count += 2;
+                l--
+                r++
+            } else {
+                break;
+            }
+        }
+        return count;
+    }
+
+</script>
+</body>
+
+</html>

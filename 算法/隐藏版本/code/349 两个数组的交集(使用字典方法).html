@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        给定两个数组 nums1 和 nums2 ，返回 它们的交集 。输出结果中的每个元素一定是 唯一 的。我们可以 不考虑输出结果的顺序 
+
+        输入：nums1 = [1,2,2,1], nums2 = [2,2]
+        输出：[2]
+
+        解题思路：
+            1.求nums1和nums2都有的值
+            2.用字典建立一个映射关系，记录nums1里有的值。映射关系的键是nums1里面的值，映射关系对应的值是是否存在true/false
+            3.遍历nums2，找出nums1里也有的值
+        
+        解题步骤：
+            1.新建一个字典，遍历nums1，填充字典
+            2.遍历nums2，遇到字典里的值就选出，并从字典中删除(防止重复)
+     -->
+     <script>
+        var intersection = function(nums1,nums2){
+            const map = new Map();//新建字典
+            nums1.forEach(n => {
+                map.set(n,true)//填充到字典中，键是n值的true
+            });
+            const res = [];
+            nums2.forEach(n=>{
+                if (map.get(n)) {//如果字典中有这个值，则表示nums1和nums2同时存在此值
+                    res.push(n);
+                    map.delete(n);//防止拿到的结果重复
+                }
+            })
+            return res;
+        }
+
+        // 时间复杂度：Om+n
+        // 空间复杂度：Om,
+
+     </script>
+</body>
+</html>

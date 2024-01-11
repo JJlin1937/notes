@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+
+        输入：head = [4,1,5,9],node =5
+        输出：[4,1,9]
+
+        解题思路：
+            1.无法删除被删除节点的上个节点
+            2.将被删除节点转移到下个节点
+            3.ex：链表4 -> 5 -> 1 -> 9,如果想删除1，则首先将1赋值为9，即链表变为4599，删除5的下一位即相当于删除了链表中的1，变为459
+        解题步骤：
+            1.将被删节点的值改为下一个节点的值
+            2.删除下个节点
+     -->
+     <script>
+        var deleteNode = function (node) {
+            node.val = node = node.next.val;
+            node.next = node.next.next;
+        }
+     </script>
+</body>
+</html>

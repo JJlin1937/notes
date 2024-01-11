@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。
+        你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。 
+
+        输入：nums = [2,7,11,15], target = 9
+        输出：[0,1]
+        解释：因为 nums[0] + nums[1] == 9 ，返回 [0, 1] 。
+
+        解题思路：
+            1.把nums想象成相亲者
+            2.把target想象成匹配条件
+            3.用字典建立一个婚姻介绍所，存储相亲者的数字(名字)和下标(电话)
+        
+        解题步骤：
+            1.新建一个字典作为婚姻介绍所
+            2.nums里的值，逐个来介绍所找对象，没有合适的就先登记着，有合适的就牵手成功
+     -->
+     <script>
+        // [2,7,11,15]  键是数字，值的下标。最后返回下标
+        var twoSum = function(nums,target){
+            const m = new Map();
+            for (let i = 0; i < nums.length; i++) {
+                const n = nums[i];
+                const n2 = target - n;
+                if (m.has(n2)) {
+                    return [m.get(n2),i];//获取对象的下标和自己的下标
+                }else{
+                    m.set(n,i);//没找到对象的需要往介绍所登记自己的数字和下标
+                }
+            }
+        }
+
+        // 时间复杂度：On,只有一个for循环
+        // 空间复杂度：On，有一个map来存值
+
+     </script>
+</body>
+</html>

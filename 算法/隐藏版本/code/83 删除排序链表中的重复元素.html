@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+    描述：
+        给定一个已排序的链表的头 head ， 删除所有重复的元素，使每个元素只出现一次 。返回 已排序的链表 。
+
+    输入：head = [1,1,2]         head = [1,1,2,3,3]
+    输出：[1,2]                  [1,2,3]
+
+    解题思路：
+        1.因为链表是有序的，所以重复元素一定相邻
+        2.遍历链表，如果发现当前元素和下一个元素值相同，就删除下一个元素值
+        
+    解题步骤：
+        1.遍历链表，如果发现当前元素和下一个元素值相同，就删除下一个元素值
+        2.遍历结束后，返回原链表的头部
+-->
+    <script>
+        var deleteDuplicates = function (head) {
+            let p = head;//新建指针指向头部
+            while (p && p.next) {
+                if (p.val === p.next.val) {//当前节点值等于下一个节点值
+                    p.next = p.next.next;//删除链表中的元素
+                } else {
+                    p = p.next;//链表自己不停遍历
+                }
+            }
+            return head;
+        }
+
+        // 时间复杂度：On n是链表的长度
+        // 空间复杂度：O1 
+    </script>
+</body>
+
+</html>

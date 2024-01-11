@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+<!-- 
+数据范围：保证输入的是合法的 IP 序列
+输入描述：
+    1. 输入IP地址
+    2. 输入10进制型的IP地址
+输出描述：
+    1. 输出转换成10进制的IP地址(转换成整数)
+    2. 输出转换后的IP地址
+
+示例：
+    输入: 10.0.3.193     167969729
+    输出： 167773121     10.3.3.193   
+        
+-->
+<script>
+    /*
+        知识点padStart(length,str) 将当前字符串用指定字符填充，至指定长度
+        length：指定长度，str：填充的字符串
+        let str = '5';
+        console.log(str.padStart(2, '0')); // 输出 "05"
+    */ 
+    
+    // var str = '10.0.3.193';
+    var str = '167969729';
+    if (str.includes(".")) {
+        toNum(str)
+    }else{
+        toIp(str)
+    }
+    // 将整数转换为IP地址
+    function toIp(num) {
+        //toString(2)将数字转换为二进制字符串
+        // padStart(32,'0') 将转成二进制的字符串用0填充到32位
+        // 为啥为32？ip地址(192.168.0.1) 每个IP地址由四个8位的字段组成
+        const str = Number(num).toString(2).padStart(32,'0');
+        const arr = [str.slice(0,8),str.slice(8,16),str.slice(16,24),str.slice(24,32)];
+        const ip = arr.map(e=>parseInt(e,2)).join(".");//将二进制数转换为整数并添加.
+        console.log(ip);
+    }
+    // 将IP地址转换为整数
+    function toNum(ip){
+        const arr = ip.split(".").map(e=>Number(e).toString(2));
+        const newArr = arr.map(e=>e.padStart(8,'0'));
+        const num = newArr.join("")
+        console.log(parseInt(num,2))
+    }
+</script>
+</body>
+
+</html>

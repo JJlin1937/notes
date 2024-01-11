@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        输入：1 -> 2 -> 3 -> 45 -> NULL
+        输出：5 -> 4 -> 3 -> 2 -> 1 -> NULL
+
+        解题思路：
+            1.反转两个节点：将n+1的next指向n
+            2.反转多个节点：双指针遍历链表，重复上述操作即可
+            3.ex：链表4 -> 5 -> 1 -> 9,如果想删除1，则首先将1赋值为9，即链表变为4599，删除5的下一位即相当于删除了链表中的1，变为459
+        解题步骤：
+            1.双指针一前一后遍历链表
+            2.反转双指针
+     -->
+     <script>
+        var reverseList = function (head) {
+            let p1 = head;
+            let p2 = null;
+            while (p1) {
+                const tmp = p1.next;
+                p1.next = p2;//翻转指向操作，但此时和下面p1 = p1.next冲突，p1无法往下走，所以在前面保存p1为临时变量
+                
+                p2 = p1;// 因为p2是null p2没有next
+                // p1 = p1.next;//将p1执行next
+                p1 = tmp;
+
+            }
+            return p2;
+        }
+     </script>
+</body>
+</html>

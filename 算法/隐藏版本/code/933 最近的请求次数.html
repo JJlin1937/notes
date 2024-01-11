@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        输入：inputs = [[],[1],[100],[3001],[3002]]
+        输出：[null,1,2,3,3]
+
+        解题思路：
+            越早发出的请求越早不在最近请求的3000ms请求里
+            满足先入先出，考虑使用队列
+        
+        解题步骤：
+            1.新建一个队列(js使用数组模拟)
+            2.有新请求就入队，3000ms前发出的请求出队
+            3.队列的长度就是最近请求的次数
+     -->
+     <script>
+        // 构造函数
+        var RecentCounter = function(){
+            this.q = [];//创建队列
+        }
+        RecentCounter.prototype.ping = function(t){
+            this.q.push(t);//入队
+            while (this.q[0] < t-3000) {//队头不在3000ms内
+                this.q.shift();//出队
+            }
+            return this.q.length;
+        }
+
+        // 时间复杂度：On, 有一个while循环 n为出队个数
+        // 空间复杂度：On，我们新建了一个队列this.q=[]，n是队列的长度，即最近的请求次数
+
+     </script>
+</body>
+</html>

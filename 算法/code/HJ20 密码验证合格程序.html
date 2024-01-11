@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- 
+        密码要求:
+            1.长度超过8位
+            2.包括大小写字母.数字.其它符号,以上四种至少三种
+            3.不能有长度大于2的包含公共元素的子串重复 （注：其他符号不含空格或换行）
+
+        数据范围：输入的字符串长度满足  1≤n≤100 
+        输入描述：
+            一组字符串。
+        输出描述：
+            如果符合要求输出：OK，否则输出NG
+
+        示例：
+            输入:
+                021Abc9000
+                021Abc9Abc1
+                021ABC9000
+                021$bc9000
+            输出：
+                OK
+                NG
+                NG
+                OK
+     -->
+    <script>
+
+        
+        function testPass(str) {
+            const list = [];
+            list.push(str);
+            for (const item of list) {
+                // . 表示匹配任何单个字符（除了换行符或其他行终止符）。
+                //{9,} 表示匹配前面的表达式至少9次，即匹配包含至少9个任意字符的字符串。
+                if(!(/.{9,}/.test(item))){//长度至少超过8位
+                    console.log('NG');
+                    continue;
+                }
+                let sum = 0;
+                if(/[a-z]/.test(item)) sum++;//匹配任何小写字母a-z
+                if(/[A-Z]/.test(item)) sum++;//匹配任何大写字母A-Z
+                if(/[\d]/.test(item)) sum++;// 匹配任何单个数字字符。等价于[0-9]
+                if(/[^\da-zA-Z]/.test(item)) sum++;//除大小写字母+数字之外
+
+                if (sum<3) {
+                    console.log("NG");
+                    continue;
+                }
+                // (.{3,}).*\1  匹配至少包含3个以上任意字符的子字符串，并将匹配的内容保存到第一个捕获组中。 
+                //. 表示匹配任意单个字符，除了换行符。
+                //.* 匹配零个或多个任意字符。
+                //\1 引用了第一个捕获组中匹配到的内容，从而要求其后再次出现相同的内容。
+                if (/(.{3,}).*\1/g.test(item)) {//不能有长度大于2的包含公共元素的子串重复
+                    console.log('NG');
+                }else{
+                    console.log('OK');
+                }
+            }
+        }
+
+        // testPass('021Abc9000');//OK
+        // testPass('02');//NG
+        // testPass('021Abc9Abc1');//NG
+        testPass('021ABC9000');//NG
+        // testPass('021$bc9000');//OK
+
+        
+
+        
+                
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

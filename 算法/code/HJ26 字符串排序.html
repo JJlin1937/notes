@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- 
+        规则要求:
+            1.英文字母从A到Z排序，不区分大小写。
+                输入：Type   输出：epTy
+            2.同一个英文字母的大小写同时存在时，按照输入顺序排序
+                输入： BabA  输出： aABb
+            3.非英文字母的其它字符保持原来的位置。
+                输入： By?e 输出： Be?y
+
+        数据范围：输入的字符串长度满足  1≤n≤1000
+        输入描述：
+            输入字符串
+        输出描述：
+            输出字符串
+
+        示例：
+            输入:
+                A Famous Saying: Much Ado About Nothing (2012/8).
+            输出：
+                A aaAAbc dFgghh: iimM nNn oooos Sttuuuy (2012/8).
+     -->
+    <script>
+
+        
+       function sortA(str) {
+            let arr = str.split('');
+            let sorted = [];
+            for (let i = 0; i < 26; i++) {
+                for (let j = 0; j < arr.length; j++) {
+                    // charCodeAt(0) 返回该字符串中第一个字符的 Unicode 编码。
+                    // 在ASCII码中，大写字母的编码是从65（'A'）开始，小写字母的编码是从97（'a'）开始，
+                    //因此代码中的65 + i表示从大写字母'A'开始依次递增，97 + i表示从小写字母'a'开始依次递增。这样就可以通过循环遍历26个字母，对应到它们的ASCII码值。
+                    if(arr[j].charCodeAt(0) == 65 +i ||arr[j].charCodeAt(0) == 97 +i) {
+                        sorted.push(arr[j]);
+                    }                   
+                }                
+            }
+            for (let i = 0; i < arr.length; i++) {
+                // 检索出非英文字母的其它字符
+                if(!/[A-Za-z]/g.test(arr[i])){
+                    // arr里面非英文其他字符在哪个位置，则在新数组sorted中插入到哪个位置
+                    sorted.splice(i,0,arr[i])//splice(i,num,new) i下标，num要删除元素个数，new插入的 新元素
+                }                
+            }
+            console.log(sorted.join(''));
+       }
+
+       sortA('A Famous Saying: Much Ado About Nothing (2012/8).')
+
+        
+
+        
+                
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
