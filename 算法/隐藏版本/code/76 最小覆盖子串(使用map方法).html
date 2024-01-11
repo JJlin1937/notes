@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        给你一个字符串 s 、一个字符串 t 。返回 s 中涵盖 t 所有字符的最小子串。如果 s 中不存在涵盖 t 所有字符的子串，则返回空字符串 "" 。 
+
+        输入：s = "ADOBECODEBANC", t = "ABC"
+        输出："BANC"
+        解释：最小覆盖子串 "BANC" 包含来自字符串 t 的 'A'、'B' 和 'C'。
+
+        输入: s = "bbbbb"
+        输出: 1
+        解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。
+
+        解题思路：
+            1.先找出所有包含 t 的子串
+            2.找出长度最小的那个子串，返回即可   
+        
+        解题步骤：
+            1.用双指针维护一个滑动窗口，用来枚举出所有的子串。
+            2.移动右指针，找到包含 t 的子串，移动左指针，尽量减少包含 t 的子串的长度。
+            3.循环上述过程，找出包含 t 的最小子串即可。
+     -->
+    <script>
+
+        var minWindow = function (s, t) {
+            let l = 0;
+            let r = 0;
+            const need = new Map();
+            for (let c of t) {
+                need.set(c, need.has(c) ? need.get(c) + 1 : 1)
+            }
+            let needType = need.size;
+            let res = '';//记录最小子串
+            while (r < s.length) {
+                const c = s[r];
+                if (need.has(c)) {
+                    need.set(c, need.get(c) - 1);
+                    if (need.get(c) === 0) needType -= 1;
+                }
+            }
+            while (needType === 0) {
+                const newRes = s.substring(l, r + 1);
+                if (!res || newRes.length < res.length) res = newRes;
+                const c2 = s[l];
+                if (need.has(c2)) {
+                    need.set(c2, need.get(c2) + 1);
+                    if (need.get(2) === 1) needType += 1;
+                }
+                l += 1;
+            }
+            return res;
+        }
+
+        // 时间复杂度：O(m+n),ms是t的长度，n是s的长度
+        // 空间复杂度：O(m)
+
+    </script>
+</body>
+
+</html>
