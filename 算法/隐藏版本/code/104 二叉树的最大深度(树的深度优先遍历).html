@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        给定一个二叉树 root ，返回其最大深度。
+        二叉树的 最大深度 是指从根节点到最远叶子节点的最长路径上的节点数。
+
+        输入：root = [3,9,20,null,null,15,7]
+        输出：3
+
+        解题思路：
+            1.求最大深度，考虑使用深度优先遍历。
+            2.在深度优先遍历过程中，记录每个节点所在的层级，找出最大的层级即可。
+        
+        解题步骤：
+            1.新建一个变量，记录最大深度
+            2.深度优先遍历整棵树，并记录每个节点的层级，同时不断刷新最大深度这个变量
+            3.遍历结束返回最大深度这个变量
+     -->
+    <script>
+        var maxDepth = function (root) {
+            let res = 0;
+            const dfs = (n, l) => {//l 记录当前层级
+                if (!n) return;//如果为空则返回
+                // console.log(n.val, l);//访问当前节点
+                // 当此节点的left节点和right节点都为空时为叶子节点
+                if (!n.left && !n.right) {//当当前的叶子节点为空时刷新最大深度
+                    res = Math.max(res,l);//不断刷新当前最大深度
+                }
+                dfs(n.left, l + 1);//访问孩子节点，遇到孩子节点层级+1
+                dfs(n.right, l + 1);//访问孩子节点
+            }
+            dfs(root, l);
+        }
+
+        // 时间复杂度：On,n是整棵树的节点数
+        // 空间复杂度：
+        //     最差：On (二叉树不分叉，只在一个节点上向下分) 
+        //     最好: OlogN (均匀的左右分叉的二叉树)
+
+    </script>
+</body>
+
+</html>
