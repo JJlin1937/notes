@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+       给定一个m x n 的矩阵来表示一片大陆上各个单元格的高度，返回既可以流向大西洋又可以流向太平洋的点的坐标位置。
+        
+        输入: heights = [[2,1],[1,2]]
+        输出: [[0,0],[0,1],[1,0],[1,1]]
+       
+        解题思路：
+            1.把矩阵想象成图。
+            2.从海岸线逆流而上遍历图，所到之处就是可以流到某个大洋的坐标。
+        
+        解题步骤：
+            1.新建两个矩阵，分别记录能流到两个大洋的坐标。
+            2.从海岸线，多管齐下，同时深度优先遍历图，过程中填充上述矩阵。
+            3.遍历两个矩阵，找出能流到两个大洋的坐标。
+            
+     -->
+    <script>
+        var pacificAtlantic = function (matrix) {
+            if (!matrix || !matrix[0]) return [];//如果传进来的数组为空或者数组不是一个二维数组就return空数组
+            const m = matrix.length;//行
+            const n = matrix[0].length;//列
+            // 构建一个长度为m的数组，第二个参数指定数组的值填充成n
+            // 此时填充了一个长度为n，里面内容为空的数组，
+            // 使用fill方法把false填充进去
+            const flow1 = Array.from({ length: m }, () => new Array(n).fill(false));
+            const flow2 = Array.from({ length: m }, () => new Array(n).fill(false));
+
+            // 深度优先遍历
+            const dfs = (r, c, flow) => {//行，列
+                flow[r][c] = true;
+                [[r - 1], c], [r + 1, c], [r, c - 1], [r, c + 1].forEach(([nr, nc]) => {
+                    if (
+                        //保证下个节点在矩阵中
+                        nr >= 0 && nr < m &&
+                        nc >= 0 && nc < m &&
+                        // 防止死循环
+                        !flow[nr][nc] &&
+                        // 保证逆流而上
+                        matrix[nr][nc] >= matrix[r][c]
+                    ) {
+                        dfs(nr, nc, flow)
+                    }
+                })
+            }
+
+            // 沿着海岸线逆流而上
+            for (let r = 0; r < m; r++) {
+                dfs(r, 0, flow1);
+                dfs(r, n - 1, flow2);
+            }
+            for (let c = 0; c < n; c++) {
+                dfs(0, c, flow1);
+                dfs(m - 1, c, flow2);
+            }
+
+            // 收集能流到两个大洋里的坐标
+            const res = [];
+            for (let r = 0; r < m; r++) {
+                for (let c = 0; c < n; c++) {
+                    if (flow1[r][c] && flow2[r][c]) {
+                        res.push([r, c]);
+                    }
+                }
+            }
+            return res;
+        }
+
+        // 时间复杂度：On,n是字符串长度
+        // 空间复杂度：O1
+
+
+    </script>
+</body>
+
+</html>

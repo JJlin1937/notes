@@ -9,13 +9,13 @@
 
 <body>
     <!-- 
-        给定一个二叉树的根节点 root ，返回 它的 中序 遍历 。
+        给定一个二叉树的根节点 root ，返回 它的 中序 遍历 。左 根 右
 
         输入：root = [1,null,2,3]
         输出：[1,3,2]
 
         解题思路：
-            1.
+            1.就是中序遍历，只是将console改成往最后的输出res里面push值就行了
             2.
         
         解题步骤：
@@ -23,10 +23,43 @@
             2.
      -->
     <script>
-        
+        // 递归版
+        var inorderTraversal = function (root) {
+            const res = [];
+            const rec = (n) => {
+                if (!n) return;
+                rec(n.left);
+                res.push(n.val);
+                rec(n.right);
+            };
+            rec(root);
+            return res;
+        }
+
+        // 非递归版 用栈来实现
+        var inorderTraversal2 = function (root) {
+            const res = [];
+            const stack = [];//新建栈
+            // 因为中序遍历首先会将所有左节点全部推到栈中
+            let p = root;//设置指针
+            while (stack.length || p) {//当所有右节点当成一个新树重新访问
+                while (p) {
+                    stack.push(p);//将指针所指的节点推到堆栈里
+                    p = p.next;//p指针不停的指向左节点
+                }
+                // 访问节点，就是出栈，push到res中
+                const n = stack.pop();
+                res.push(n.val);//访问
+                // 开始访问右节点
+                p = n.right;
+            }
+            return res;
+        }
+
+
 
         // 时间复杂度：On,n是整棵树的节点数
-        // 空间复杂度：On,n是整棵树的节点数
+        // 空间复杂度：On
     </script>
 </body>
 
