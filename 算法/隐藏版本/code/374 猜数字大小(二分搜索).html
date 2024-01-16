@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        从1到n随机选择一个数字，让你猜和预想的数字比大了还是小了
+        -1 你猜大了  1 你猜小了  0 答对了
+
+        输入：n = 10, pick = 6
+        输出：6
+
+        解题思路：
+            1.二分搜索。
+            2.调用guess函数，来判断中间元素是否为目标值。
+        
+        解题步骤：
+            1.从数组的中间元素开始，如果中间元素正好的目标值，则搜索过程结束。
+            2.如果目标值大于或小于中间元素，则在数组大于或小于中间元素的那一半中查找。
+     -->
+    <script>
+        var guessNumber = function (n) {
+            let low = 1;//定义范围最小值
+            let high = n;//定义范围最大值
+            while (low <= high) {
+                const mid = Math.floor((low + high) / 2);//取中间值
+                const res = guess(mid);
+                if (res === 0) {
+                    return mid
+                } else if (res === 1) {
+                    low = mid + 1;
+                } else {
+                    high = mid - 1;
+                }
+            }
+        }
+
+        // 时间复杂度：logN,因为不断分割成一半
+        // 空间复杂度：O1
+    </script>
+</body>
+
+</html>

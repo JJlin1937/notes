@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        输入：prices = [7,1,5,3,6,4]
+        输出：7
+        解释：在第 2 天（股票价格 = 1）的时候买入，在第 3 天（股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5 - 1 = 4 。
+            随后，在第 4 天（股票价格 = 3）的时候买入，在第 5 天（股票价格 = 6）的时候卖出, 这笔交易所能获得利润 = 6 - 3 = 3 。
+            总利润为 4 + 3 = 7 。
+
+        解题思路：
+            1.前提：我们在上帝视角，知道未来的股票价格。
+            2.局部最优：加好就收，见差不动，不做任何长远打算。
+        
+        解题步骤：
+            1.新建一个变量，用来统计总利润。
+            2.遍历价格数组，如果当前价格比昨天高，就在昨天买，今天卖，否则就不交易。
+            3.遍历结束后，返回所有利润之和。
+     -->
+    <script>
+        var maxPorfit = function (prices) {
+            let profit = 0;//利润总和
+            for (let i = 1; i < prices.length; i++) {
+                if (prices[i] > prices[i - 1]) {//如果当前价格比昨天高
+                    profit += prices[i] - prices[i - 1]
+                }
+            }
+            return profit;
+        }
+
+        // 时间复杂度：On，有for循环
+        // 空间复杂度：O1
+    </script>
+</body>
+
+</html>

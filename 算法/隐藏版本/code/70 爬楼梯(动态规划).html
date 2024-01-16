@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
+        每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？
+
+        输入：n = 2
+        输出：2
+        解释：有两种方法可以爬到楼顶。
+        1. 1 阶 + 1 阶
+        2. 2 阶
+
+        解题思路：
+            1.爬到第n阶可以在第n-1阶爬1个台阶，或者在第n-2阶爬2个台阶。
+            2.F(n)= F(n-1)+F(n-2)。
+            3.使用动态规划
+        
+        解题步骤：
+            1.定义子问题：F(n)= F(n-1)+F(n-2)。
+            2.反复执行:从2循环到n，执行上述公式。
+     -->
+    <script>
+        var climbStairs = function (n) {
+            if (n < 2) return 1;
+            let dp0 = 1;
+            let dp1 = 1;
+            for (let i = 2; i <= n; i++) {
+                const temp = dp0;
+                dp0 = dp1;
+                dp1 = dp1 + temp;
+            }
+            return dp1
+
+        }
+        // 时间复杂度：On
+        // 空间复杂度：O1
+
+
+        // var climbStairs = function (n) {
+        //     const dpList = [1, 2];
+        //     for (let i = 2; i <= n; i++) {
+        //         dpList[i] = dpList[i - 1] + dpList[i - 2];
+        //     }
+
+        //     return dpList[n - 1];//返回n最后一位
+        // };
+
+        // 时间复杂度：On
+        // 空间复杂度：On
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        输入: g = [1,2], s = [1,2,3]
+        输出: 2
+        解释: 
+        你有两个孩子和三块小饼干，2个孩子的胃口值分别是1,2。
+        你拥有的饼干数量和尺寸都足以让所有孩子满足。
+        所以你应该输出2.
+
+        解题思路：
+            1.局部最优：既能满足孩子，还消耗最少。
+            2.先将 "较小的饼干" 分给"胃口最小"的孩子。
+        
+        解题步骤：
+            1.对饼干数组和胃口数组升序排序。
+            2.遍历饼干数组，找到能满足第一个孩子的饼干。
+            3.然后继续遍历饼干数组，找到满足第二、三、......、n个孩子的饼干。
+     -->
+    <script>
+        var findContentChildren = function (g, s) {//g胃口数组 、s饼干数组
+            const sortFunc = function (a, b) {
+                return a - b;
+            };
+            g.sort(sortFunc);
+            s.sort(sortFunc);
+            let i = 0;//代表第一个孩子
+            s.forEach(n => {
+                if (n >= g[i]) {//如果这块饼干大于等于第一个孩子
+                    i++;//找第二、三、n 个孩子...
+                }
+            })
+            return i;
+        }
+        // 时间复杂度：O(n*logN)
+        // 空间复杂度：O1
+    </script>
+</body>
+
+</html>
