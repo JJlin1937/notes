@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        题目描述：给定一个字符串s，最多只能进行一次变换，返回变换后能得到的最小字符串（按照字典序进行比较）。字典序指的是按照字母表顺序进行排序
+
+        变换规则：交换字符串中任意两个不同位置的字符。
+        输入描述：一串小写字母组成的字符串s
+        输出描述：按照要求进行变换得到的最小字符串
+        补充说明：s是都是小写字符组成1<=s.length<=1000
+
+        输入: bcdefa
+        输出：acdefb
+        说明：a和b进行位置交换，可以等到最小字符串
+     -->
+
+    <script>
+        const readline = require('readline');
+
+        const rl = readline.createInterface({
+            input: process.stdin,
+            output: process.stdout
+        });
+
+        rl.on('line', (line) => {
+            const s = line.trim();
+            let res = s;
+            const n = s.length;
+            for (let i = 0; i < n; i++) {
+                for (let j = i + 1; j < n; j++) {
+                    const c = s.split('');
+                    const t = c[i];
+                    c[i] = c[j];
+                    c[j] = t;
+                    const s2 = c.join('');
+                    if (res.localeCompare(s2) > 0) {//localeCompare比较两个字符串的大小
+                        res = s2;
+                    }
+                }
+            }
+            console.log(res);
+        });
+    </script>
+
+</body>
+
+</html>
