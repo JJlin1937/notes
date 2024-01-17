@@ -2,33 +2,21 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
 
 <body>
-    <script>
-        //     arr = nihaobcd e fgjk l mpqrstuvwxyz
-        // allChar = abcdefgh i jklm n opqrstuvwxyz
-      var key = 'nihao';
-      let arr = [...new Set([...key])];//把key转成数组并去重
-      let allChar = [...'abcdefghijklmnopqrstuvwxyz'];
-      for (let i = 0; i < 26; i++) {
-        if (!arr.includes(allChar[i])) {//把key中没有的字符加入字母表
-            arr.push(allChar[i])
-        }
-      }
-      let word = 'ni';
-      let log = [];//定义密文数组
-      for(let j =0;j<word.length;j++){
-        let index = allChar.indexOf(word[j]);
-        log.push(arr[index])
-      }
-      console.log(log.join(""));
+  <script>
+    function sayHello(hihi,haha) {
+      console.log(hihi + this.name);
+      console.log(haha + this.name);
+    }
 
-
-    </script>
+    let person = { name: 'JJLin' };
+    sayHello.call(person,'欢迎','最佳国语男歌手') //HelloJJLin
+  </script>
 </body>
 
 </html>
