@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        给定一个不含重复数字的数组 nums ，返回其 所有可能的全排列 。你可以 按任意顺序 返回答案。
+
+        输入：nums = [1,2,3]
+        输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+
+        解题思路：
+            1.要求：① 所有排列情况；②没有重复元素。
+            2.有出路、有死路。
+            3.考虑使用回溯算法。
+        
+        解题步骤：
+            1.用递归模拟出所有情况。
+            2.遇到包含重复元素的情况（死路），就回溯。
+            3.收集所有到达递归终点的情况，并返回。
+     -->
+    <script>
+        var permute = function(nums){
+            const res = [];
+            const backtrack = (path)=>{//递归函数
+                if(path.length === nums.length){//递归出来的长度等于输入序列的长度
+                    res.push(path);
+                    return;
+                }
+                nums.forEach(n => {
+                    if (path.includes(n)) return;//不能有重复元素
+                    backtrack(path.concat(n));
+                });
+            }
+            backtrack([]);
+            return res;
+        }
+
+        // 时间复杂度：O(n!)，n!=1x2x3x...x(n-1)n。n的阶乘
+        // 空间复杂度：O(n)
+    </script>
+</body>
+
+</html>
