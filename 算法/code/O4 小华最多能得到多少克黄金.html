@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        知识点BFS 搜索
+        题目描述：
+        小华按照地图去寻宝，地图上被划分成 m 行和 n 列的方格，横纵坐标范围分别是 [0， n-1]和[0, m-1]。在横坐标和纵坐标的数位之和不大于k的方格中存在黄金（每个方格中仅存在一克黄金)，但横坐标和纵坐标之和大于k的方格存在危险不可进入。小华从入口(0,0)进入，任何时候只能向左，右，上，下四个方向移动一格。请问小华最多能获得多少克黄金？
+
+        输入描述：
+        坐标取值范围如下：0<=m<=50  0<=n<=50
+        k的取值范围如下：0<=k<=100  输入中包含3个字数，分别是m，n，k
+
+        输出描述： 最多能获得多少克黄金
+
+        输入:4 5 7
+        输出：20
+        说明：如图每个单元格中的数位之和均不大于7，都是符合要求的，所以可以最多可获得20克黄金 最后一位(3,4)和为7，所以横5竖4所能组成和小于7的最多方格数为 5x4 = 20
+              0      1     2     3     4
+        0   (0,0)  (0,1) (0,2) (0,3) (0,4)
+
+        1   (1,0)  (1,1) (1,2) (1,3) (1,4)
+
+        2   (2,0)  (2,1) (2,2) (2,3) (2,4)
+
+        3   (3,0)  (3,1) (3,2) (3,3) (3,4) 
+     -->
+
+    <script>
+        let input = "4 5 7".split(" ").map((i) => parseInt(i));//[4,5,7]
+        let m = input[0];
+        let n = input[1];
+        let k = input[2];
+        let res = 0;
+
+        let ints = new Array(m);//行，因为m=4，所以生成4个空数组[ , , , ]
+        for (let i = 0; i < m; i++) {
+            ints[i] = new Array(n).fill(0);//生成一个4行5列的二维数组
+        }
+        /*  ints
+            0:  [0, 0, 0, 0, 0]
+            1:  [0, 0, 0, 0, 0]
+            2:  [0, 0, 0, 0, 0]
+            3:  [0, 0, 0, 0, 0]
+        */
+
+        handle(0, 0);
+        console.log(res);
+        function handle(x, y) {
+            const count = jisuan(x, y);
+            if (count > k || ints[x][y] === 1) {
+                return
+            } else {
+                res++;
+            }
+            ints[x][y] = 1;
+            if (x > 0) {
+                handle(x - 1, y)
+            }
+            if (x < m - 1) {
+                handle(x + 1, y)
+            }
+            if (y > 0) {
+                handle(x, y - 1)
+            }
+            if (y < n - 1) {
+                handle(x, y + 1)
+            }
+        }
+
+        function jisuan(x, y) {
+            let a, b, c, d;
+            if (x >= 10) {
+                const xs = x.toString().split('');
+                a = parseInt(xs[0]);
+                b = parseInt(xs[1]);
+            } else {
+                a = 0;
+                b = x;
+            }
+            if (y >= 10) {
+                const ys = y.toString().split('');
+                c = parseInt(ys[0]);
+                d = parseInt(ys[1]);
+            } else {
+                c = 0;
+                d = x;
+            }
+            return a + b + c + d;
+        }
+    </script>
+
+</body>
+
+</html>

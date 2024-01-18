@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        主管期望你来实现英文输入法单词联想功能。
+        需求如下:依据用户输入的单词前缀,从已输入的英文语句中联想出用户想输入的单词,按字典序输出联想到的单词序列,如果联想不到，请输出用户输入的单词前缀。
+        注意：
+        1. 英文单词联想时，区分大小写
+        2. 缩略形式如"don't"，判定为两个单词，"don"和"t"
+        3. 输出的单词序列,不能有重复单词,且只能是英文单词,不能有标点符号
+        输入描述：
+            输入为两行。
+            首行输入一段由英文单词word和标点符号组成的语句str;
+            接下来一行为一个英文单词前缀pre
+            0<word.length() <= 200
+            0<str.length <= 100000
+            0< pre <=20
+        输出描述：输出符合要求的单词序列或单词前缀，存在多个时，单词之间以单个空格分割
+
+        输入:I love you 
+            He
+            
+        输出:He
+        说明从用户已输入英文语句"I love you"中提炼出","love","you"三个单词,接下来用户输入"He",从已输入信息中无法联想到任何符合要求的单词,因此输出用户输入的单词前缀。
+     -->
+
+    <script>
+        const readline = require('readline');
+        const rl = readline.createInterface({
+            input:prcess.stdin,
+            output:prcess.stdout,
+        });
+
+        rl.question('请输入字符串',(str)=>{
+            const strings = str.replace(/'/g,' ')//对 ' 符合进行空格处理
+              .replace(/,/g,'') // 对 , . ? ! 符合进行删除处理 
+              .replace(/\./g,'') //.和?是元字符 需要转义
+              .replace(/\?/g,'') 
+              .replace(/!/g,'')
+              .split(' ') //处理完了按空格分割
+            
+            strings.sort(); // 因为是字典需要进行排序
+
+            rl.question('请输入关键词：',(key)=>{
+                const keyLen = key.length;
+                const strLen = strings.length;
+                let res = '';
+
+                for (let i = 0; i < strLen; i++) {
+                    const s = strings[i];
+                    if (s.length >= keyLen && s.substring(0,keyLen) === key) {//匹配的字符串需要判断长度，并进行关键词长度分割
+                        if (res.length !== 0) {
+                            res += ' ';
+                        }
+                        res +=s;
+                    }
+                }
+                if (res.length === 0) {
+                    res = key;
+                }
+                console.log(res);
+                rl.close;
+            })
+        })
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

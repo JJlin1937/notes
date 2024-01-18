@@ -2,21 +2,25 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
 </head>
 
 <body>
-  <script>
-    function sayHello(hihi,haha) {
-      console.log(hihi + this.name);
-      console.log(haha + this.name);
-    }
+	<script>
+		function f() {
+			return new Promise(resolve => {
+				resolve('hhh')
+			})
+		}
+		async function doSomething1() {
+			let x = await f()
+			console.log(x);//hhh
+		}
+		doSomething1()
 
-    let person = { name: 'JJLin' };
-    sayHello.call(person,'欢迎','最佳国语男歌手') //HelloJJLin
-  </script>
+	</script>
 </body>
 
 </html>
