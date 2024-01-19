@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        题目描述：
+        给定两个整数数组 array1, array2,数组元素按升序排列。假设从array1, array2中分别取出一个元素可构成一对元素，现在需要取出k对元素,并对取出的所有元素求和,计算和的最小值
+        注意:两对元素如果对应于array1, array2中的两个下标均相同,则视为同一对元素。
+        输入描述：
+        输入两行数组array1、array2，每行首个数字为数组大小size(0< size <=100）；
+        0<array1[i] <= 1000
+        0<array2[i] <= 1000
+        接下来—行为正整数k
+        0<k <= array1.size()*array2.size()
+        输出描述：满足要求的最小和
+
+        输入：
+            3 1 1 2        1 1 2 3
+            3 1 2 3        1 2 3 3
+            2
+        输出：4
+        说明：
+        用例中，需要取2对元素
+        取第一个数组第0个元素与第二个数组第0个元素组成1对元素[1,1];
+        取第一个数组第1个元素与第二个数组第0个元素组成1对元素[1,1];
+        求和为1+1+1+1=4，为满足要求的最小和
+
+     -->
+
+
+    <script>
+        function minSum(arr1, arr2, k) {
+            let pairs = [];
+            // 生成所有的组合，并计算它们之和
+            for (let num1 of arr1) {
+                for (let num2 of arr2) {
+                    pairs.push(num1 + num2);
+                }
+            }
+            // 对合进行排序
+            pairs.sort((a, b) => a - b);
+            // 取前k个并计算它们之和
+            return pairs.slice(0, k).reduce((acc, curr) => acc + curr, 0);//acc累加器，curr是当前的值，0是从第0个开始
+        }
+
+        // 输入
+        let array1 = [1, 1, 2];
+        let array2 = [1, 2, 3];
+        let k = 2;
+
+        // 输出
+        console.log(minSum(array1.slice(1), array2.slice(1), k)); // 4
+    </script>
+
+
+</body>
+
+</html>

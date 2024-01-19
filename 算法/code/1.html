@@ -9,16 +9,13 @@
 
 <body>
 	<script>
-		function f() {
-			return new Promise(resolve => {
-				resolve('hhh')
-			})
+		var includes0 = this.listInfo[i][4];
+		var includeReopen = this.listInfo[i][5].substring(13, 14);
+		console.log(includeReopen)
+		if (includes0.indexOf('00:00:00') == '-1' || includeReopen == 1) {
+			nameList.push(this.listInfo[i][1]);
+			macList.push(this.listInfo[i][2]);
 		}
-		async function doSomething1() {
-			let x = await f()
-			console.log(x);//hhh
-		}
-		doSomething1()
 
 	</script>
 </body>
