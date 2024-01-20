@@ -2,21 +2,22 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
 </head>
 
 <body>
-  <script>
-    function sayHello(hihi,haha) {
-      console.log(hihi + this.name);
-      console.log(haha + this.name);
-    }
+	<script>
+		var includes0 = this.listInfo[i][4];
+		var includeReopen = this.listInfo[i][5].substring(13, 14);
+		console.log(includeReopen)
+		if (includes0.indexOf('00:00:00') == '-1' || includeReopen == 1) {
+			nameList.push(this.listInfo[i][1]);
+			macList.push(this.listInfo[i][2]);
+		}
 
-    let person = { name: 'JJLin' };
-    sayHello.call(person,'欢迎','最佳国语男歌手') //HelloJJLin
-  </script>
+	</script>
 </body>
 
 </html>
