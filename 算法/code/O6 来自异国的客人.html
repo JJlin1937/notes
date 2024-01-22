@@ -9,72 +9,46 @@
 
 <body>
     <!-- 
-        主管期望你来实现英文输入法单词联想功能。
-        需求如下:依据用户输入的单词前缀,从已输入的英文语句中联想出用户想输入的单词,按字典序输出联想到的单词序列,如果联想不到，请输出用户输入的单词前缀。
-        注意：
-        1. 英文单词联想时，区分大小写
-        2. 缩略形式如"don't"，判定为两个单词，"don"和"t"
-        3. 输出的单词序列,不能有重复单词,且只能是英文单词,不能有标点符号
-        输入描述：
-            输入为两行。
-            首行输入一段由英文单词word和标点符号组成的语句str;
-            接下来一行为一个英文单词前缀pre
-            0<word.length() <= 200
-            0<str.length <= 100000
-            0< pre <=20
-        输出描述：输出符合要求的单词序列或单词前缀，存在多个时，单词之间以单个空格分割
+        题目描述:
+        有位客人来自异国，在该国使用m进制计数。该客人有个幸运数字n(n<m)，每次购物时，其总是喜欢计算本次支付的花费(折算为异国的价格后)中存在多少幸运数字。问：当其购买一个在我国价值k的产品时，其中包含多少幸运数字？
 
-        输入:I love you 
-            He
-            
-        输出:He
-        说明从用户已输入英文语句"I love you"中提炼出","love","you"三个单词,接下来用户输入"He",从已输入信息中无法联想到任何符合要求的单词,因此输出用户输入的单词前缀。
+        输入描述：
+            第一行输入为 k, n, m。
+            其中：k表示 该客人购买的物品价值（以十进制计算的价格)
+            n 表示 该客人的幸运数字
+            m 表示 该客人所在国度的采用的进制
+        输出描述：
+            输出幸运数字的个数，行末无空格。
+        补充说明：
+        当输入非法内容时，输出0
+
+        输入：10 2 4                     
+        输出：2
+        说明：10用4进制表示时为22,同时,异国客人的幸运数字是2,故而此处输出为2,表示有2个幸运数字。
+
+        输入：10 4 4                     
+        输出：0
+        说明：此时客人的幸运数字为4，但是由于该国最大为4进制，故而在该国的进制下不可能出现幸运数字，故而返回0
      -->
 
     <script>
-        const readline = require('readline');
-        const rl = readline.createInterface({
-            input:prcess.stdin,
-            output:prcess.stdout,
-        });
+        let input = "10 2 4".split(' ');
+        let k = parseInt(input[0]);
+        let n = parseInt(input[1]);
+        let m = parseInt(input[2]);
 
-        rl.question('请输入字符串',(str)=>{
-            const strings = str.replace(/'/g,' ')//对 ' 符合进行空格处理
-              .replace(/,/g,'') // 对 , . ? ! 符合进行删除处理 
-              .replace(/\./g,'') //.和?是元字符 需要转义
-              .replace(/\?/g,'') 
-              .replace(/!/g,'')
-              .split(' ') //处理完了按空格分割
-            
-            strings.sort(); // 因为是字典需要进行排序
-
-            rl.question('请输入关键词：',(key)=>{
-                const keyLen = key.length;
-                const strLen = strings.length;
-                let res = '';
-
-                for (let i = 0; i < strLen; i++) {
-                    const s = strings[i];
-                    if (s.length >= keyLen && s.substring(0,keyLen) === key) {//匹配的字符串需要判断长度，并进行关键词长度分割
-                        if (res.length !== 0) {
-                            res += ' ';
-                        }
-                        res +=s;
-                    }
+        if (n >= m) {
+            console.log(0);
+        } else {
+            let str = k.toString(m);//将k转换成m进制
+            let count = 0;
+            for (let i = 0; i < str.length; i++) {
+                if (str.charAt(i) === n.toString().charAt(0)) {//str字符串中第i个字符是否等于n这个字符(客人的幸运数字)
+                    count++;
                 }
-                if (res.length === 0) {
-                    res = key;
-                }
-                console.log(res);
-                rl.close;
-            })
-        })
-
-
-
-
-
-
+            }
+            console.log(count);
+        }
     </script>
 
 </body>

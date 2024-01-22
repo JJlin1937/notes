@@ -31,30 +31,30 @@
 
      -->
     <script>
-        // 可以使用贪心算法
-        function splitTeams(scores) {
-            // 首先对分数从大到小排序
-            scores.sort((a, b) => b - a);
+        function getMinDiff(ratings) {
+            // 将参与者的评分按照从大到小进行排序。
+            ratings.sort((a, b) => b - a);
 
-            let team1 = [];
-            let team2 = [];
+            // 初始化两个队伍的实力总和。
+            let team1Sum = 0;
+            let team2Sum = 0;
 
-            for (let i = 0; i < scores.length; i++) {
-                //10个人组队，且数组从大到小排序
-                if (i % 2 === 0) {//偶数
-                    team1.push(scores[i])
+            // 依次将评分最高的参与者分配给两个队伍中评分总和较小的那个队伍。
+            for (let i = 0; i < ratings.length; i++) {
+                if (team1Sum <= team2Sum) {
+                    team1Sum += ratings[i];
                 } else {
-                    team2.push(scores[i])
+                    team2Sum += ratings[i];
                 }
             }
 
-            const sum1 = team1.reduce((acc, curr) => acc + curr, 0);
-            const sum2 = team2.reduce((acc, curr) => acc + curr, 0);
-            return Math.abs(sum1 - sum2);//取绝对值
+            // 返回两队实力差绝对值的最小值。
+            return Math.abs(team1Sum - team2Sum);
         }
-        const scores = [5, 1, 8, 3, 4, 6, 7, 10, 9, 2];
-        const minDiff = splitTeams(scores);
-        console.log(minDiff);
+
+        // 测试代码
+        const ratings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        console.log(getMinDiff(ratings)); // 输出：1
     </script>
 
 
