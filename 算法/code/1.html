@@ -31,26 +31,37 @@
 
      -->
 	<script>
-		function decryptCipher(cipher) {
-			let decrypted = '';
-			let i = 0;
-			while (i < cipher.length) {
-				if (cipher[i + 2] === '*') {//首先检查当前字符及后两个字符是否构成一个可以映射的范围（即 '10*' 到 '26*'）
-					//String.fromCharCode()给定的字符编码返回一个字符串
-					// a-z 的阿斯克码是 97-122
-					decrypted += String.fromCharCode(parseInt(cipher.substr(i, 2)) + 96);
-					i += 3;//'10*' 到 '26*'占3个字符
+		let input = "ABC<c89%000<";
+		let stringBuilder = '';
+		let isDigit = false;
+		let isLowerCase = false;
+		let isUpperCase = false;
+		let isLetter = false;
+
+		for (let i = 0; i < input.length; i++) {
+			let c = input.charAt(i);
+			if (c == '<' && stringBuilder.length > 0) {
+				stringBuilder = stringBuilder.slice(0, -1);
+			} else {
+				stringBuilder += c;
+				if (/[0-9]/.test(c)) {
+					isDigit = true;
+				} else if (/[a-z]/.test(c)) {
+					isLowerCase = true;
+				} else if (/[A-Z]/.test(c)) {
+					isUpperCase = true;
 				} else {
-					decrypted += String.fromCharCode(parseInt(cipher[i]) + 96);
-					i += 1;
+					isLetter = true;
 				}
 			}
-			return decrypted;
 		}
 
-		// 示例用法
-		let cipher = "20*19*20*";
-		console.log(decryptCipher(cipher));  // 输出 "tst"
+		let isTrue = false;
+		if (stringBuilder.length >= 8 && isDigit && isLetter && isLowerCase && isUpperCase) {
+			isTrue = true;
+		}
+
+		console.log(stringBuilder + ',' + isTrue);
 	</script>
 
 

@@ -42,13 +42,13 @@
             let isFuhao = false;
             for (let i = 0; i < len; i++) {
                 let c = s.charAt(i);
-                if (/\d/.test(c)) {
+                if (/\d/.test(c)) {//匹配一个数字字符
                     if (isFuhao) {
                         temp += c;
                     } else {
                         list.push(parseInt(c));
                     }
-                } else if (c === '-') {
+                } else if (c === '-') {//匹配负号
                     if (temp && temp !== '-') {
                         list.push(parseInt(temp));
                     }
