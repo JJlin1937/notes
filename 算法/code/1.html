@@ -31,30 +31,26 @@
 
      -->
 	<script>
-		function getMinDiff(ratings) {
-			// 将参与者的评分按照从大到小进行排序。
-			ratings.sort((a, b) => b - a);
-
-			// 初始化两个队伍的实力总和。
-			let team1Sum = 0;
-			let team2Sum = 0;
-
-			// 依次将评分最高的参与者分配给两个队伍中评分总和较小的那个队伍。
-			for (let i = 0; i < ratings.length; i++) {
-				if (team1Sum <= team2Sum) {
-					team1Sum += ratings[i];
+		function decryptCipher(cipher) {
+			let decrypted = '';
+			let i = 0;
+			while (i < cipher.length) {
+				if (cipher[i + 2] === '*') {//首先检查当前字符及后两个字符是否构成一个可以映射的范围（即 '10*' 到 '26*'）
+					//String.fromCharCode()给定的字符编码返回一个字符串
+					// a-z 的阿斯克码是 97-122
+					decrypted += String.fromCharCode(parseInt(cipher.substr(i, 2)) + 96);
+					i += 3;//'10*' 到 '26*'占3个字符
 				} else {
-					team2Sum += ratings[i];
+					decrypted += String.fromCharCode(parseInt(cipher[i]) + 96);
+					i += 1;
 				}
 			}
-
-			// 返回两队实力差绝对值的最小值。
-			return Math.abs(team1Sum - team2Sum);
+			return decrypted;
 		}
 
-		// 测试代码
-		const ratings = [1 ,2, 3, 4, 5, 6, 7, 8, 9, 10];
-		console.log(getMinDiff(ratings)); // 输出：1
+		// 示例用法
+		let cipher = "20*19*20*";
+		console.log(decryptCipher(cipher));  // 输出 "tst"
 	</script>
 
 

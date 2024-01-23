@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        题目描述：
+            给定一段"密文"字符串s,其中字符都是经过"密码本"映射的，现需要将"密文"解密并且输出
+            映射的规则（'a'-'i）分别用（'1'-'9'）表示：Cj'-'z'）分别用（'10*'-'26*）表示
+        约束：映射始终唯一
+        
+        输入描述：“密文”字符串
+        
+        输出描述：明文字符串
+
+        补充说明：翻译后的文本的长度在100以内
+
+        输入：20*19*20
+
+        输出：tst
+     -->
+    <script>
+        function decryptCipher(cipher) {
+            let decrypted = '';
+            let i = 0;
+            while (i < cipher.length) {
+                if (cipher[i + 2] === '*') {//首先检查当前字符串及后面两个字符一起是否构成一个可以映射的范围（即 '10*' 到 '26*'）
+                    // String.fromCharCode()给定的字符编码返回一个字符串
+                    // a-z 的阿斯克码范围是 97-122
+                    decrypted += String.fromCharCode(parseInt(cipher.substr(i, 2)) + 96);
+                    i += 3;////'10*' 到 '26*'占3个字符
+                } else {
+                    decrypted += String.fromCharCode(parseInt(cipher[i]) + 96);
+                    i += 1;
+                }
+            }
+            return decrypted;
+        }
+        // 示例用法
+		let cipher = "20*19*20*";
+		console.log(decryptCipher(cipher));  // 输出 "tst"
+
+    </script>
+
+
+</body>
+
+</html>
