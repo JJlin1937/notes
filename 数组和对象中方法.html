@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1.for
+        // const items = ["item1", "item2", "item3"];
+        // const copyItems = [];
+        // for (let i = 0; i < items.length; i++) {
+        //     copyItems.push(items[i]);
+        // }
+        // console.log(copyItems);//['item1', 'item2', 'item3']
+
+        // 2.forEach()
+        // items.forEach(e => {
+        //     copyItems.push(e);
+        // });
+        // console.log(copyItems);//['item1', 'item2', 'item3']
+
+        // 3.for...of
+        // for (const e of items) {
+        //     console.log(e); //item1  item2  item3
+        // }
+
+        //4.map
+        // let arr = [1, 2, 3, 4];
+        // let newArr = arr.map((e) => e * 2);// 对数组中的每个元素乘以2
+        // console.log(newArr);//[2, 4, 6, 8]
+
+        // 5.filter
+        // let arr = [1, 2, 3, 4];
+        // let newArr = arr.filter((e) => e > 2)
+        // console.log(newArr);// [3, 4]
+
+        //6.find
+        // let arr = [1, 2, 3, 4];
+        // let newArr = arr.find((e) => e > 2)
+        // console.log(newArr);// 3
+
+        // 7.every
+        // const arr = [2, 4, 6, 8, 10];
+        // const result = arr.every(e => e % 2 === 0);
+        // console.log(result); // 输出: true
+
+        // 8.some
+        // const arr = [1, 3, 5, 7, 10];
+
+        // const result = arr.some(e => e > 5);
+        // console.log(result); // 输出: true
+
+        // 9.reduce
+        // const arr = [1, 2, 3, 4, 5, 6];
+        // const sum = arr.reduce((pre, current) => pre + current, 0);
+        // console.log(sum);//21
+        // ------------- 对象  ----------------------------
+        // 10. for...in
+        // let obj = {
+        //     a: 1,
+        //     b: 2,
+        //     c: 3
+        // };
+        // for (let key in obj) {
+        //     console.log(key, obj[key]); // a 1  b 2  c 3
+        // }
+
+        // 11.Object.keys()
+        // const obj = { a: 1, b: 2, c: 3 };
+        // const keys = Object.keys(obj);
+        // console.log(keys); // 输出: ['a', 'b', 'c']
+
+        // 12.Object.values()
+
+        // const obj = { a: 1, b: 2, c: 3 };
+        // const values = Object.values(obj);
+        // console.log(values); // 输出: [1, 2, 3]
+
+        // 13.Object.entries()
+        const obj = { a: 1, b: 2, c: 3 };
+        const entries = Object.entries(obj);
+        console.log(entries); // 输出: [['a', 1], ['b', 2], ['c', 3]]
+
+
+
+    </script>
+</body>
+
+</html>
