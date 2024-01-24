@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 
 <body>
-	<!-- 
+    <!-- 
         题目描述：
         部门准备举办一场王者荣耀表演赛,有10名游戏爱好者参与,分为两队,每队5人。每位参与者都有一个评分,代表着他的游戏水平,为了表演赛尽可能精彩,我们需要把10名参赛者分为实力尽量相近的两队。一队的实力可以表示为这一队5名队员的评分总和。
         现在给你10名参与者的游戏水平评分，请你根据上述要求分队，最后输出这两组的实力差绝对值。
@@ -30,39 +30,18 @@
             重复上述步骤，直到所有的参与者都被分配完毕。
 
      -->
-	<script>
-		let input = "ABC<c89%000<";
-		let stringBuilder = '';
-		let isDigit = false;
-		let isLowerCase = false;
-		let isUpperCase = false;
-		let isLetter = false;
+    <button>点击</button>
+    <script>
 
-		for (let i = 0; i < input.length; i++) {
-			let c = input.charAt(i);
-			if (c == '<' && stringBuilder.length > 0) {
-				stringBuilder = stringBuilder.slice(0, -1);
-			} else {
-				stringBuilder += c;
-				if (/[0-9]/.test(c)) {
-					isDigit = true;
-				} else if (/[a-z]/.test(c)) {
-					isLowerCase = true;
-				} else if (/[A-Z]/.test(c)) {
-					isUpperCase = true;
-				} else {
-					isLetter = true;
-				}
-			}
-		}
+        const xhr = new XMLHttpRequest()
+        xhr.open('GET',url)
+        xhr.addEventListener('loadend',()=>{
+            console.log(xhr.response);
+        })
+        xhr.send()
 
-		let isTrue = false;
-		if (stringBuilder.length >= 8 && isDigit && isLetter && isLowerCase && isUpperCase) {
-			isTrue = true;
-		}
 
-		console.log(stringBuilder + ',' + isTrue);
-	</script>
+    </script>
 
 
 </body>
