@@ -30,16 +30,14 @@
             重复上述步骤，直到所有的参与者都被分配完毕。
 
      -->
-    <button>点击</button>
+    <input type="text" name="age" size="3" onchange="validate(this,18,99);">
     <script>
-
-        const xhr = new XMLHttpRequest()
-        xhr.open('GET',url)
-        xhr.addEventListener('loadend',()=>{
-            console.log(xhr.response);
-        })
-        xhr.send()
-
+        function validate(obj,lowVal,hiVal) {
+            console.log(obj.value);
+            if ((obj.value < lowVal)||(obj.value > hiVal)) {
+                alert("输入错误")
+            }
+        }
 
     </script>
 
