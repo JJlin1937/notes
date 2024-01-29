@@ -32,12 +32,19 @@
      -->
     <input type="text" name="age" size="3" onchange="validate(this,18,99);">
     <script>
-        function validate(obj,lowVal,hiVal) {
-            console.log(obj.value);
-            if ((obj.value < lowVal)||(obj.value > hiVal)) {
-                alert("输入错误")
+        var module1 = (function () {
+            var _count = 0
+            var m1 = function(){
+
             }
-        }
+            var m2 = function(){
+
+            }
+            return {
+                m1,m2
+            }
+        })()
+        
 
     </script>
 
