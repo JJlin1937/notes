@@ -30,21 +30,11 @@
             重复上述步骤，直到所有的参与者都被分配完毕。
 
      -->
-    <input type="text" name="age" size="3" onchange="validate(this,18,99);">
+    <input type="text" id="my-input" />
     <script>
-        var module1 = (function () {
-            var _count = 0
-            var m1 = function(){
-
-            }
-            var m2 = function(){
-
-            }
-            return {
-                m1,m2
-            }
-        })()
-        
+        window.addEventListener('beforeunload', function (event) {
+            event.returnValue = '你确定离开吗？';
+        });
 
     </script>
 
