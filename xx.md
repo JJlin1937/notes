@@ -1,1 +1,0 @@
-luci官方文档：https://openwrt.github.io/luci/
